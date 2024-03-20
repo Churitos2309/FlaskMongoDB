@@ -1,0 +1,62 @@
+<link rel="stylesheet" href="{{url_for('static', filename='css/index.css')}}">
+<script src="{{url_for('static', filename='js/acciones.js') }}"></script>
+
+<div class="login-wrap">
+	<div class="login-html">
+		<input id="tab-1" type="radio" name="tab" class="sign-in" checked><label for="tab-1" class="tab">Iniciar Sesion</label>
+		<input id="tab-2" type="radio" name="tab" class="sign-up"><label for="tab-2" class="tab">Registrar</label>
+		<div class="login-form">
+            <<form action="/login" method="post">
+				<div class="sign-in-htm">
+					<div class="group">
+						<label for="user" class="label">USUARIO</label>
+						<input type="text" id="user" name="username" class="input" required>
+					</div>
+					<div class="group">
+						<label for="pass" class="label">CONTRASEÑA</label>
+						<input type="password" id="pass" name="password" class="input" data-type="password" required>
+					</div>
+					<div class="group">
+						<input id="check" type="checkbox" class="check" checked>
+						<label for="check"><span class="icon"></span> Mantener Sesión</label>
+					</div>
+					<div class="group">
+						<button type="submit" class="button">ACCESO</button>
+					</div>
+					<div class="hr"></div>
+					<div class="foot-lnk">
+						<a href="#forgot">¿Has olvidado tu contraseña?</a>
+					</div>
+				</div>
+			</form>
+
+			<form action="/register" method="post">
+				<div class="sign-up-htm">
+					<div class="group">
+						<label for="user_reg" class="label">USUARIO</label>
+						<input type="text" id="user_reg" name="username" class="input" required>
+					</div>
+					<div class="group">
+						<label for="pass_reg" class="label">CONTRASEÑA</label>
+						<input type="password" id="pass_reg" name="password" class="input" data-type="password" required>
+					</div>
+					<div class="group">
+						<label for="conf_pass_reg" class="label">CONFIRMAR CONTRASEÑA</label>
+						<input type="password" id="conf_pass_reg" name="conf_password" class="input" data-type="password" required>
+					</div>
+					<div class="group">
+						<label for="email_reg" class="label">CORREO ELECTRONICO</label>
+						<input type="text" id="email_reg" name="correo" class="input" required>
+					</div>
+					<div class="group">
+						<button type="submit" class="button">Registrarse</button>
+					</div>
+					<div class="hr"></div>
+					<div class="foot-lnk">
+						<label for="tab-1">¿Ya estás registrado?</label>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
