@@ -1,5 +1,4 @@
-{% extends 'index.html' %} 
-{% block title %}Tabla Productos{% endblock %} 
+{% extends 'index.html' %} {% block title %}Tabla Productos{% endblock %}
 {%block main %}
 <div class="container">
   <h1 class="text-center mt-5 mb-5">APP API-REST PYTHON FLASK-MONGODB</h1>
@@ -21,60 +20,124 @@
 
             <label for="">Precio:</label>
             <input type="text" class="form-control mb-3" name="precio" />
-            
+
             <label for="">Categoria:</label>
             <select name="categoria" id="categoria">
               {% for categoria in categoriaLista %}
-              <option value="{{categoria['nombre']}}">{{categoria['nombre']}}</option>
+              <option value="{{categoria['nombre']}}">
+                {{categoria['nombre']}}
+              </option>
               {% endfor %}
-            </select> <br><br>
+            </select>
+            <br /><br />
             <!-- <input type="text" class="form-control mb-3" name="categoria" /> -->
 
-            <button class="btn btn-primary" type="submit" onclick="confirmarAccion()" >Guardar</button>
+            <button
+              class="btn btn-primary"
+              type="submit"
+              onclick="confirmarAccion()"
+            >
+              Guardar
+            </button>
           </form>
         </div>
       </div>
     </div>
 
     <div class="col-md-6">
-        <div class="card">
-            <div class="card-header">
-                <h5 class="text center">Productos</h5>
-            </div>
-
-            <div class="card-body">
-                <ul class="list-group">
-                    <div class="row row-col-2 row-cols-sm-2 row-cols-md-3 row-cols-lg-3">
-                        {% for producto in productos %}
-                        
-                            <div class="col">
-                                <li class="list-group-item mb-3">
-                                    <form action="/edit/{{producto.codigo}}" method="post">
-                                        <input type="text" class="form-control" value="{{producto.codigo}}" name="codigo">
-
-                                        <small>Codigo:</small>
-                                        <input type="text" class="form-control" value="{{producto.nombre}}" name="nombre">
-
-                                        <small>Precio:</small>
-                                        <input type="text" class="form-control" value="{{producto.precio}}" name="precio">
-
-                                        <small>Categoria:</small>
-                                        <input type="text" class="form-control" value="{{producto.categoria}}" name="categoria">
-
-                                        <button class="btn btn-primary btn-sm mt-3" type="submit" onclick="confirmarAccion()">Editar</button>
-                                        <a href="{{url_for('delete',producto_nombre = producto.codigo)}}" class="btn btn-danger btn-sm mt-3" onclick="confirmarAccion()">Eliminar</a>
-
-                                    </form>
-                                </li>
-                            </div>
-                            
-                        {% endfor %}
-                    </div>
-                </ul>
-            </div>
+      <div class="card">
+        <div class="card-header">
+          <h5 class="text center">Productos</h5>
         </div>
-    </div>
 
+        <div class="card-body">
+          <ul class="list-group">
+            <div
+              class="row row-col-2 row-cols-sm-2 row-cols-md-3 row-cols-lg-3"
+            >
+              {% for producto in productos %}
+
+              <div class="col">
+                <li class="list-group-item mb-3">
+                  <form action="/edit/{{producto._id|string}}" method="post">
+                    <small>Codigo:</small>
+                    <input
+                      type="text"
+                      class="form-control"
+                      value="{{producto.codigo}}"
+                      name="codigo"
+                    />
+
+                    <small>Nombre:</small>
+                    <input
+                      type="text"
+                      class="form-control"
+                      value="{{producto.nombre}}"
+                      name="nombre"
+                    />
+
+                    
+                    <small>Precio:</small>
+                    <input
+                      type="text"
+                      class="form-control"
+                      value="{{producto.precio}}"
+                      name="precio"
+                    />
+
+                    <small>Categoria:</small>
+                    <input
+                      type="text"
+                      class="form-control"
+                      value="{{producto.categoria}}"
+                      name="categoria"
+                    />
+                    <!-- <select name="categoria" class="form-control" required>
+
+                      {% for categoria in categoriaLista %}
+                        {% if categoria ['_id'] == producto.categoria %}
+                          <option value="{{categoria['_id'] }}" selected>{{categoria['nombre']}}</option>
+                          {% else %}
+                          <option value="{{categoria['_id'] }}">{{categoria['nombre']}}</option>                          
+                        {% endif %}
+                      {% endfor %}
+
+                    </select> -->
+
+                    <button
+                      class="btn btn-primary btn-sm mt-3"
+                      type="submit"
+                      onclick="confirmarAccion()"
+                    >
+                      Editar
+                    </button>
+                    <a
+                      href="{{url_for('delete',producto_id = producto._id | string)}}"
+                      class="btn btn-danger btn-sm mt-3"
+                      onclick="confirmarAccion()"
+                      >Eliminar</a
+                    >
+                  </form>
+                </li>
+              </div>
+
+              {% endfor %}
+            </div>
+          </ul>
+
+          {% if total_productos > por_pagina %}
+          <nav class="paginacion">
+              {% for numero_pagina in range(1, total_paginas + 1) %}
+                <a href="{{url_for('home', pagina = numero_pagina) }}">{{numero_pagina}}</a>
+                
+              {% endfor %}
+          </nav>
+            
+          {% endif %}
+
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 {% endblock %}

@@ -11,7 +11,7 @@ usuarios_coleccion = db['usuarios']  # Obtiene la coleccion de usuarios
 
 
 @app.route('/register', methods=['GET', 'POST'])
-@verificar_autenticacion# Ruta para registrar nuevos usuarios
+#@verificar_autenticacion# Ruta para registrar nuevos usuarios
 def register():
     mensaje_error = None  # Mensaje de error inicialmente vacio
     
@@ -27,7 +27,7 @@ def register():
             usuarios_coleccion.insert_one({'username': username, 'password': password, 'correo': correo})        
             return redirect(url_for('login'))  # Redirige al usuario a la pagina de inicio de sesion
         else:
-            mensaje_error = 'Credenciales incorrectas. Intenta nuevamente'  # Establece el mensaje de error
+            mensaje_error = 'Credenciales incorrectas del registro. Intenta nuevamente'  # Establece el mensaje de error
     
     # Renderiza el template de registro, pasando el mensaje de error
     return render_template('login.html', mensaje_error=mensaje_error)
